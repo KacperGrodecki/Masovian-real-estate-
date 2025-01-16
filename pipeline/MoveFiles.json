@@ -21,18 +21,12 @@
 						"referenceName": "BinaryDataSource_Folder",
 						"type": "DatasetReference",
 						"parameters": {
-							"Container": {
-								"value": "@pipeline().parameters.SourceStore_Location",
-								"type": "Expression"
-							},
-							"Directory": {
-								"value": "@pipeline().parameters.SourceStore_Directory",
-								"type": "Expression"
-							}
+							"Container": "adftrain",
+							"Directory": "source"
 						}
 					},
 					"fieldList": [
-						"childItems"
+						"exists"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
@@ -91,7 +85,8 @@
 								"sink": {
 									"type": "BinarySink",
 									"storeSettings": {
-										"type": "AzureBlobStorageWriteSettings"
+										"type": "AzureBlobStorageWriteSettings",
+										"copyBehavior": "PreserveHierarchy"
 									}
 								},
 								"enableStaging": false,
@@ -119,21 +114,11 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "BinaryDataDestination",
+									"referenceName": "BinaryDataSource_Folder",
 									"type": "DatasetReference",
 									"parameters": {
-										"Container": {
-											"value": "@pipeline().parameters.DestinationStore_Location",
-											"type": "Expression"
-										},
-										"Directory": {
-											"value": "@pipeline().parameters.DestinationStore_Directory",
-											"type": "Expression"
-										},
-										"filename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
+										"Container": "adftrain",
+										"Directory": "sink"
 									}
 								}
 							]

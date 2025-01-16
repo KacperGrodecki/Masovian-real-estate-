@@ -1,0 +1,29 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedService1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "metadata.csv",
+				"folderPath": "sink",
+				"container": "adftrain"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Role ID;Role Contractor Requisition ID;Role Recruiting Requisition ID;Role Fulfillment Channel;Role Status;GCP Status;Role Demand type;Role Is Overdue;Role Is Sold;Role Win Probability;Role Priority;Role Is Chargeable;Role Country/Territory;Role Source Location;Role Primary Contact;Client;Project;Role Created Date;Role Start Date;Role End Date;Role Work Location;Role Career Level From;Role Career Level To;Role Title;Role Primary Skill;Role Secondary Skill;Role Other Skills;Role Language;Role Description;Role Created By;Role Secondary Contact;Project Secondary Contact;Skill Category;Skill Category Group;Role Fulfillment Entity L1;Role Fulfillment Entity L2;Role Fulfillment Entity L3;Role Fulfillment Entity L4;Role Fulfillment Entity L5;Role Fulfillment Entity L6;Role Fulfillment Entity L7;Role Fulfillment Entity L8;Role Fulfillment Entity L9;Role Fulfillment Entity L10;Role Job Family Group;Project Supervising Entity L3",
+				"type": "String"
+			}
+		]
+	}
+}

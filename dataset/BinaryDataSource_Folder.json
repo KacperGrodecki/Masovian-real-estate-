@@ -19,14 +19,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": {
-					"value": "@{dataset().Directory}",
-					"type": "Expression"
-				},
-				"container": {
-					"value": "@{dataset().Container}",
-					"type": "Expression"
-				}
+				"fileName": "DATA AI REPORT 10.21.xlsx",
+				"folderPath": "source",
+				"container": "adftrain"
 			}
 		}
 	}
