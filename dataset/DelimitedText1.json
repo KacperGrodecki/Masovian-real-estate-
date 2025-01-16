@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "metadata.csv",
-				"folderPath": "sink",
+				"fileName": "DATA AI REPORT 10.21.xlsx",
+				"folderPath": "source",
 				"container": "adftrain"
 			},
 			"columnDelimiter": ",",
