@@ -41,18 +41,12 @@
 								"referenceName": "BinaryDataSource_Folder",
 								"type": "DatasetReference",
 								"parameters": {
-									"Container": {
-										"value": "@pipeline().parameters.SourceStore_Location",
-										"type": "Expression"
-									},
-									"Directory": {
-										"value": "@pipeline().parameters.SourceStore_Directory",
-										"type": "Expression"
-									}
+									"Container": "adftrain",
+									"Directory": "source"
 								}
 							},
 							"fieldList": [
-								"childItems"
+								"exists"
 							],
 							"storeSettings": {
 								"type": "AzureBlobStorageReadSettings",
@@ -111,7 +105,8 @@
 										"sink": {
 											"type": "BinarySink",
 											"storeSettings": {
-												"type": "AzureBlobStorageWriteSettings"
+												"type": "AzureBlobStorageWriteSettings",
+												"copyBehavior": "PreserveHierarchy"
 											}
 										},
 										"enableStaging": false,
@@ -139,21 +134,11 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "BinaryDataDestination",
+											"referenceName": "BinaryDataSource_Folder",
 											"type": "DatasetReference",
 											"parameters": {
-												"Container": {
-													"value": "@pipeline().parameters.DestinationStore_Location",
-													"type": "Expression"
-												},
-												"Directory": {
-													"value": "@pipeline().parameters.DestinationStore_Directory",
-													"type": "Expression"
-												},
-												"filename": {
-													"value": "@item().name",
-													"type": "Expression"
-												}
+												"Container": "adftrain",
+												"Directory": "sink"
 											}
 										}
 									]
@@ -253,8 +238,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/BinaryDataSource_Folder')]",
-				"[concat(variables('factoryId'), '/datasets/BinaryDataSource_File')]",
-				"[concat(variables('factoryId'), '/datasets/BinaryDataDestination')]"
+				"[concat(variables('factoryId'), '/datasets/BinaryDataSource_File')]"
 			]
 		},
 		{
@@ -366,16 +350,45 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": {
-							"value": "@{dataset().Directory}",
-							"type": "Expression"
-						},
-						"container": {
-							"value": "@{dataset().Container}",
-							"type": "Expression"
-						}
+						"fileName": "DATA AI REPORT 10.21.xlsx",
+						"folderPath": "source",
+						"container": "adftrain"
 					}
 				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedService1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedService1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "metadata.csv",
+						"folderPath": "sink",
+						"container": "adftrain"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Role ID;Role Contractor Requisition ID;Role Recruiting Requisition ID;Role Fulfillment Channel;Role Status;GCP Status;Role Demand type;Role Is Overdue;Role Is Sold;Role Win Probability;Role Priority;Role Is Chargeable;Role Country/Territory;Role Source Location;Role Primary Contact;Client;Project;Role Created Date;Role Start Date;Role End Date;Role Work Location;Role Career Level From;Role Career Level To;Role Title;Role Primary Skill;Role Secondary Skill;Role Other Skills;Role Language;Role Description;Role Created By;Role Secondary Contact;Project Secondary Contact;Skill Category;Skill Category Group;Role Fulfillment Entity L1;Role Fulfillment Entity L2;Role Fulfillment Entity L3;Role Fulfillment Entity L4;Role Fulfillment Entity L5;Role Fulfillment Entity L6;Role Fulfillment Entity L7;Role Fulfillment Entity L8;Role Fulfillment Entity L9;Role Fulfillment Entity L10;Role Job Family Group;Project Supervising Entity L3",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/linkedService1')]"
