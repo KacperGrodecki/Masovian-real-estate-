@@ -1,0 +1,40 @@
+{
+	"name": "BinaryDataSource_File",
+	"properties": {
+		"description": "It describes the file in the data source store.",
+		"linkedServiceName": {
+			"referenceName": "linkedService1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Container": {
+				"type": "String"
+			},
+			"Directory": {
+				"type": "String"
+			},
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@{dataset().Directory}",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@{dataset().Container}",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}
