@@ -20,7 +20,7 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"fileListPath": "adftrain/source",
+							"recursive": true,
 							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
@@ -38,10 +38,12 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "BinaryDataSource_Folder",
+						"referenceName": "BinaryDataSource_File",
 						"type": "DatasetReference",
 						"parameters": {
-							"Directory": "source"
+							"Container": "adftrain",
+							"Directory": "source",
+							"filename": "DATA AI REPORT 10.21.xlsx"
 						}
 					}
 				],
@@ -58,20 +60,6 @@
 				]
 			}
 		],
-		"parameters": {
-			"SourceStore_Location": {
-				"type": "String"
-			},
-			"SourceStore_Directory": {
-				"type": "String"
-			},
-			"DestinationStore_Location": {
-				"type": "String"
-			},
-			"DestinationStore_Directory": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
