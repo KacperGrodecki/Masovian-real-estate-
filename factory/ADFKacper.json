@@ -1,0 +1,9 @@
+{
+	"name": "ADFKacper",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6358e9ea-3ba4-4b71-8052-30b1d1e9fc9c",
+		"tenantId": "d5bf0f3c-5921-4cc1-878e-268ecc89df2d"
+	}
+}
