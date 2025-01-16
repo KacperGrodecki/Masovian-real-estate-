@@ -20,7 +20,8 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": true
+							"fileListPath": "adftrain/source",
+							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
 							"type": "BinaryReadSettings"
@@ -40,7 +41,6 @@
 						"referenceName": "BinaryDataSource_Folder",
 						"type": "DatasetReference",
 						"parameters": {
-							"Container": "adftrain",
 							"Directory": "source"
 						}
 					}
