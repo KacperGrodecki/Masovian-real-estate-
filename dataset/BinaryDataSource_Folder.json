@@ -6,14 +6,6 @@
 			"referenceName": "linkedService1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"Container": {
-				"type": "String"
-			},
-			"Directory": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
